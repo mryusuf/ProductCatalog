@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct ProductCatalogApp: App {
+    @StateObject private var controller = HomeControllerDefault()
+    @StateObject private var coreDataController = CoreDataController()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeScreen<HomeControllerDefault>()
+                .environmentObject(controller)
+                .environment(\.managedObjectContext, coreDataController.container.viewContext)
         }
     }
 }
